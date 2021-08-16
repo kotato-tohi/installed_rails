@@ -1,0 +1,35 @@
+- name: updated yum packages
+  yum:
+    name: "*"
+    state: latest
+  become: yes
+
+- name: installed git
+  yum:
+    name: "git"
+    state: present
+  become: yes
+    
+
+- name: deployed .bash_profile
+  template:
+    src: .bash_profile
+    dest: ~/.bash_profile
+    mode: 0644
+  become_user: "{{ __working_user }}"
+
+- name: made dir .bash.d
+  file:
+    path: ~/.bash.d
+    state: directory
+    mode: 0755
+  become_user: "{{ __working_user }}"
+
+
+- name: set LANG={{ __locale }} in /etc/locale.conf
+  lineinfile:
+    dest: /etc/locale.conf
+    regexp: "^LANG="
+    line: "LANG={{ __locale }}"
+    backup: yes
+  become: yes
