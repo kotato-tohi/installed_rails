@@ -21,8 +21,10 @@
   shell: |
     yum-config-manager --disable "{{ __mysql_current_repo }}"
     yum-config-manager --enable "{{ __mysql_new_repo }}"
+  register: check
   become: yes
   # when: __mysql_version == 8.0 and mariadb.results[0].yumstate == 'installed'
+
 
 - name: installed mysql client
   yum:
