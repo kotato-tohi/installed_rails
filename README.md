@@ -3,6 +3,7 @@
 ## 実行方法
 
 ### hostsファイルの編集
+対象ホストと、秘密鍵のパスを指定
 
 ```
 [target]
@@ -16,6 +17,7 @@ ansible_ssh_private_key_file=<PRIVATE KEY PATH>
 ```
 
 ### 各種変数
+デフォルトでは下記の通りになっているので必要であれば適宜変更してください。
 
 /ruby/vars/main.yml
 インストールするrubyのバージョン指定
@@ -113,4 +115,3 @@ $ ansible-playbool -i hosts site.yml
 │       └── vars
 │           └── main.yml
 └── site.yml
-```
