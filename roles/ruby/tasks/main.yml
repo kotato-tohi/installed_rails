@@ -1,54 +1,27 @@
-# - name: installed rbenv
-#   git:
-#     repo: https://github.com/sstephenson/rbenv.git
-#     dest: ~/.rbenv
+- name: installed rbenv
+  git:
+    repo: https://github.com/sstephenson/rbenv.git
+    dest: ~/.rbenv
 
-# - name: registerd rbenv path
-#   template:
-#     src: 001_rbenv.sh
-#     dest: ~/.bash.d/001_rbenv.sh
-#     mode: 0755
+- name: registerd rbenv path
+  template:
+    src: 001_rbenv.sh
+    dest: ~/.bash.d/001_rbenv.sh
+    mode: 0755
 
-# - name: installed ruby-build
-#   git:
-#     repo: https://github.com/sstephenson/ruby-build.git
-#     dest: ~/.rbenv/plugins/ruby-build
+- name: installed ruby-build
+  git:
+    repo: https://github.com/sstephenson/ruby-build.git
+    dest: ~/.rbenv/plugins/ruby-build
 
 
-# rubyコマンドがあるか?
-  # あれば次のチェック
-    #　rubyのversionは指定したものか
-  # なければrbenvで指定のversionをインストール
+
 
 - name: configured ruby version {{ __ruby_version }}
   shell: bash -lc "rbenv global {{ __ruby_version }} "
   register: res
   failed_when: res.rc not in [0, 1]
 
-
-# - name: debug switch
-#   debug:
-#     var: res
-#   when: res.rc == 1
-
 - name: installed ruby "{{ __ruby_version }}"
   shell: bash -lc 'rbenv install "{{ __ruby_version }}" && rbenv global {{ __ruby_version }}  '　
-  # shell: bash -lc 'rbenv install --list && ruby -v'
   when: res.rc == 1
-
-
-
-# - name: check installed ruby
-#   stat:
-#     path: ~/.rbenv/shims/ruby
-#   register: ruby_bin
-
-# - name: check installed ruby version "{{ __ruby_version }}"
-#   shell: bash -lc 'ruby -v'
-#   register: ruby_ver
-
-# - name: debug ruby
-#   debug:
-#     var: ruby_ver.stdout
-
-
