@@ -1,0 +1,33 @@
+## install mysql client
+
+- name: check if pre-install mariadb exists
+  yum:
+    list: mariadb-libs
+  register: mariadb
+
+- name: removed mariadb
+  yum:
+    name: mariadb-libs
+    state: absent
+  become: yes
+
+- name: registerd mysql {{ __mysql_version }}
+  yum: 
+    name: "{{ __repo_url }}"
+    state: present
+  become: yes
+
+- name: switch yum repository (for version 8.0)
+  shell: |
+    yum-config-manager --disable "{{ __mysql_current_repo }}"
+    yum-config-manager --enable "{{ __mysql_new_repo }}"
+  become: yes
+  # when: __mysql_version == 8.0 and mariadb.results[0].yumstate == 'installed'
+
+- name: installed mysql client
+  yum:
+    name: mysql-community-client
+    state: present
+  become: yes
+
+
