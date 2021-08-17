@@ -4,12 +4,25 @@
     state: latest
   become: yes
 
-- name: installed git
+- name: installed Prerequisite package
   yum:
-    name: "git"
-    state: present
+    name:
+      - git
+      - make
+      - gcc-c++
+      - patch
+      - libyaml-devel
+      - libffi-devel
+      - libicu-devel
+      - zlib-devel
+      - readline-devel
+      - libxml2-devel
+      - libxslt-devel
+      - ImageMagick
+      - ImageMagick-devel
+      - openssl-devel
+      - mysql-devel   
   become: yes
-    
 
 - name: deployed .bash_profile
   template:

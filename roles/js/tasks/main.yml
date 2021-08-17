@@ -1,0 +1,39 @@
+- name: check installed nodejs
+  stat:
+    path: /usr/bin/node
+  register: nodejs_bin
+
+- name: check node js bin
+  debug:
+    var: nodejs_bin
+
+- name: downloaded nodejs source
+  shell: curl -sL "{{ __nodejs_source_url }}" | bash -
+  when: not nodejs_bin.stat.exists
+  become: yes
+
+- name: installed nodejs
+  yum:
+    name: nodejs
+    state: present
+  when: not nodejs_bin.stat.exists
+  become: yes
+
+- name: check installed yarn
+  stat:
+    path: /usr/bin/yarn
+  register: yarn_bin
+
+- name: downloaded yarn repo
+  get_url:
+    url: https://dl.yarnpkg.com/rpm/yarn.repo
+    dest: /etc/yum.repos.d/yarn.repo
+  become: yes
+  when: not yarn_bin.stat.exists
+
+- name: installed yarn
+  yum:
+    name: yarn
+    state: present
+  become: yes
+  when: not yarn_bin.stat.exists

@@ -1,0 +1,5 @@
+# MySQL version setting
+__repo_url: https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm
+__mysql_version: 8.0
+__mysql_new_repo: mysql80-community
+__mysql_current_repo: mysql57-community

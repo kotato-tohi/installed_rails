@@ -1,0 +1,17 @@
+- name: nginx installed check
+  yum:
+    list: nginx
+  register: nginx_installed_status
+
+
+- name: installed nginx
+  shell: amazon-linux-extras install -y nginx1
+  when: nginx_installed_status.results | selectattr("yumstate", "match", "installed") | list | length == 0
+  become: yes
+
+- name: started nginx
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+  become: yes
