@@ -68,7 +68,8 @@ $ ansible-playbool -i hosts site.yml
 - mysql-clientがインストールされている
 
 ### nginx
-- nginxがインストールされている
+- ~~nginxがインストールされている~~
+- rails環境構築では不要なので削除(プロジェクトデプロイのplaybookに追加)
 
 ### ruby
 - rbenvがインストールされている
@@ -78,6 +79,7 @@ $ ansible-playbool -i hosts site.yml
 
 ```
 
+.
 ├── README.md
 ├── hosts
 ├── roles
@@ -101,11 +103,6 @@ $ ansible-playbool -i hosts site.yml
 │   │   ├── templates
 │   │   └── vars
 │   │       └── main.yml
-│   ├── nginx
-│   │   ├── tasks
-│   │   │   └── main.yml
-│   │   ├── templates
-│   │   └── vars
 │   ├── rails
 │   │   ├── tasks
 │   │   ├── templates
@@ -118,5 +115,3 @@ $ ansible-playbool -i hosts site.yml
 │       └── vars
 │           └── main.yml
 └── site.yml
-
-```
