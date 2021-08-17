@@ -1,9 +1,9 @@
 - hosts: target
   roles:
     - init
-    - mysql
-    - nginx
-    - js
-    - ruby
+    # - mysql
+    # - nginx
+    # - js
+    # - ruby
   vars:
     __working_user: ec2-user

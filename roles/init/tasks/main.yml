@@ -46,3 +46,21 @@
     line: "LANG={{ __locale }}"
     backup: yes
   become: yes
+
+- name: created backup sshd_config
+  copy:
+    src: /etc/ssh/sshd_config
+    dest: /etc/ssh/sshd_config.org
+  become: yes
+
+- name: Prevented ssh time out
+  blockinfile:
+    dest: /etc/ssh/sshd_config
+    insertafter: '^#ClientAliveCountMax 3'
+    content: |
+      ClientAliveInterval 120
+      ClientAliveCountMax 3
+    validate: sshd -t -f %s
+  notify:
+    - sshdRestart
+  become: yes
