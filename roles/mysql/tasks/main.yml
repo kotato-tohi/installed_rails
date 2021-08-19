@@ -32,4 +32,9 @@
     state: present
   become: yes
 
+- name: installed mysql-devel
+  yum:
+    name: mysql-community-devel
+    state: present
+  become: yes
 
