@@ -64,3 +64,12 @@
   notify:
     - sshdRestart
   become: yes
+
+- name: edited environment file
+  blockinfile:
+    dest: /etc/environment
+    insertafter: '^# xxxx'
+    content: |
+      DATABASE_PASSWORD={{ __database_password }}
+      SECRET_KEY_BASE={{ __secret_key_base }}
+  become: yes
