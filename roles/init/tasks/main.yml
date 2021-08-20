@@ -47,11 +47,11 @@
     backup: yes
   become: yes
 
-- name: created backup sshd_config
-  copy:
-    src: /etc/ssh/sshd_config
-    dest: /etc/ssh/sshd_config.org
-  become: yes
+    #- name: created backup sshd_config
+    # copy:
+    #src: /etc/ssh/sshd_config
+    #dest: /etc/ssh/sshd_config.org
+    #become: yes
 
 - name: Prevented ssh time out
   blockinfile:
