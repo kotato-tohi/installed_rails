@@ -1,9 +1,0 @@
-[target]
-13.115.1.22
-
-[target:vars]
-ansible_ssh_port=22
-ansible_ssh_user=ec2-user
-ansible_ssh_private_key_file=~/.ssh/common_key.pem
-__database_password=testpassword
-__secret_key_base=secret-key
